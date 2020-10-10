@@ -13,5 +13,6 @@ public class TokenDto {
   private String value;
   private String type;
   private String id;
-  //  private RoleEnum role;
+  private String name;
+  private String email;
 }

@@ -55,6 +55,8 @@ public class AuthService implements UserDetailsService {
       return TokenDto.builder()
           .id(user.getId())
           .value(token)
+          .name(user.getName())
+          .email(user.getEmail())
           .type(tokenService.getTokenType())
           .build();
 
