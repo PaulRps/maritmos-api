@@ -58,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers("/auth")
         .permitAll()
+        .antMatchers(HttpMethod.POST, "/user")
+        .permitAll()
         .anyRequest()
         .authenticated()
         .and()
@@ -71,5 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   // STATIC FILES (imgs, .js) CONFIGURATIONS
   @Override
-  public void configure(WebSecurity web) throws Exception {}
+  public void configure(WebSecurity web) throws Exception {
+    //    web.ignoring().antMatchers("/**");
+  }
 }
