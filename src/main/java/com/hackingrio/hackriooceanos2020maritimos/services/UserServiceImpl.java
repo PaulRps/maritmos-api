@@ -168,4 +168,37 @@ public class UserServiceImpl implements UserService {
           ApiMessageEnum.ERROR_ON_DELETE_ENTITY, e, String.format("User[id=%d]", id));
     }
   }
+
+  @Override
+  public User incrementUserScore(String id) {
+    Optional.ofNullable(id)
+        .orElseThrow(
+            () -> {
+              log.error("USER_ID parameter is null");
+              return new ApiException(ApiMessageEnum.ERROR_PARAMETER_NOT_PRESENT, "USER_ID");
+            });
+
+    Optional<User> user = find(id);
+    if (!user.isPresent()) {
+      log.error("User[id={}] do not exist", id);
+      throw new ApiException(
+          ApiMessageEnum.ERROR_RESOURCE_NOT_FOUND, String.format("User[id=%d]", id));
+    }
+
+    try {
+
+      log.debug("incremeting score of user [{}]", user.toString());
+      incrementScore(user);
+      log.debug("incremented user's score [{}]", user.toString());
+      return user.get();
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      throw new ApiException(
+          ApiMessageEnum.ERROR_INTERNAL_SERVER, e, String.format("User[id=%d]", id));
+    }
+  }
+
+  private void incrementScore(Optional<User> user) {
+    user.map(User::getScore).ifPresent(score -> user.get().setScore(score + 1));
+  }
 }

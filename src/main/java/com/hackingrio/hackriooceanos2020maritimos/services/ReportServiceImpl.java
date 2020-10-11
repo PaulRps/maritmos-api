@@ -17,10 +17,12 @@ import org.springframework.stereotype.Service;
 public class ReportServiceImpl implements ReportService {
 
   private static ReportRepository reportRepository;
+  private static UserService userService;
 
   @Autowired
-  ReportServiceImpl(final ReportRepository reportRepository) {
+  ReportServiceImpl(final ReportRepository reportRepository, final UserService userService) {
     ReportServiceImpl.reportRepository = reportRepository;
+    ReportServiceImpl.userService = userService;
   }
 
   @Override
@@ -65,6 +67,7 @@ public class ReportServiceImpl implements ReportService {
 
       log.debug("creating report {}}", report.toString());
       Report saved = reportRepository.save(toEntity(report));
+      Optional.ofNullable(report.getUserId()).ifPresent(userService::incrementUserScore);
       report.setId(saved.getId());
       return report;
     } catch (Exception e) {

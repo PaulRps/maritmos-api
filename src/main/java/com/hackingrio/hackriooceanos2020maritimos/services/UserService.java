@@ -19,4 +19,6 @@ public interface UserService {
   void update(User u);
 
   void delete(String id);
+
+  User incrementUserScore(String id);
 }
