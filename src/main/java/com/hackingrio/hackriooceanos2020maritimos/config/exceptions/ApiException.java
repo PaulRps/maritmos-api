@@ -28,4 +28,6 @@ public class ApiException extends RuntimeException {
     this.customMessage = customMessage;
     this.complement = complement;
   }
+
+  public ApiException() {}
 }

@@ -10,7 +10,8 @@ public enum ApiMessageEnum {
   ERROR_ON_SAVE_ENTITY("Error on save entity {0}", HttpStatus.INTERNAL_SERVER_ERROR),
   ERROR_ON_DELETE_ENTITY("Error on delete entity {0}", HttpStatus.INTERNAL_SERVER_ERROR),
   ERROR_INTERNAL_SERVER("Internal server error on {0}", HttpStatus.INTERNAL_SERVER_ERROR),
-  ERROR_JWT_AUTH("Error to get JWT token to user {0}", HttpStatus.BAD_REQUEST);
+  ERROR_JWT_AUTH("Error to get JWT token to user {0}", HttpStatus.BAD_REQUEST),
+  ERROR_READ_BYTES_FROM("Error on read bytes from {0}", HttpStatus.INTERNAL_SERVER_ERROR);
 
   private String message;
   private HttpStatus status;
