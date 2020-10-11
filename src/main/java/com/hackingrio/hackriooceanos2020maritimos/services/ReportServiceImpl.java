@@ -143,6 +143,7 @@ public class ReportServiceImpl implements ReportService {
     //      }
     return Report.builder()
         .description(report.getDescription())
+        .category(report.getCategory())
         .latitude(report.getLatitude())
         .longitude(report.getLongitude())
         .userId(report.getUserId())
