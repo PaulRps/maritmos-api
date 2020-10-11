@@ -5,7 +5,6 @@ import com.hackingrio.hackriooceanos2020maritimos.config.exceptions.ApiMessageEn
 import com.hackingrio.hackriooceanos2020maritimos.domain.dto.ReportDto;
 import com.hackingrio.hackriooceanos2020maritimos.domain.entities.Report;
 import com.hackingrio.hackriooceanos2020maritimos.repositories.ReportRepository;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -134,22 +133,22 @@ public class ReportServiceImpl implements ReportService {
   }
 
   private Report toEntity(ReportDto report) {
-    try {
-      //      Binary binaryImg = null;
-      //      if (Objects.nonNull(report.getImage())) {
-      //        binaryImg = new Binary(BsonBinarySubType.BINARY, report.getImage().getBytes());
-      //      }
-      return Report.builder()
-          .description(report.getDescription())
-          .latitude(report.getLatitude())
-          .longitude(report.getLongitude())
-          .userId(report.getUserId())
-          .image(report.getImage())
-          .build();
-    } catch (IOException e) {
-      log.error("Error on read image bytes", e);
-      throw new ApiException(ApiMessageEnum.ERROR_READ_BYTES_FROM, e, "REPORTDTO_IMAGE");
-    }
+    //    try {
+    //      Binary binaryImg = null;
+    //      if (Objects.nonNull(report.getImage())) {
+    //        binaryImg = new Binary(BsonBinarySubType.BINARY, report.getImage().getBytes());
+    //      }
+    return Report.builder()
+        .description(report.getDescription())
+        .latitude(report.getLatitude())
+        .longitude(report.getLongitude())
+        .userId(report.getUserId())
+        .image(report.getImage())
+        .build();
+    //    } catch (IOException e) {
+    //      log.error("Error on read image bytes", e);
+    //      throw new ApiException(ApiMessageEnum.ERROR_READ_BYTES_FROM, e, "REPORTDTO_IMAGE");
+    //    }
   }
 
   private ReportDto toDto(Report report) {
