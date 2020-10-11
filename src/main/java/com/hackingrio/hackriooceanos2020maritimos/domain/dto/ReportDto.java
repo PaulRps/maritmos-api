@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Builder
@@ -18,5 +17,6 @@ public class ReportDto {
   private String latitude;
   private String longitude;
   private String userId;
-  private MultipartFile image;
+  private String image;
+  //  private MultipartFile image;
 }

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,5 +21,6 @@ public class Report {
   private String latitude;
   private String longitude;
   private String userId;
-  private Binary image;
+  private String image;
+  //  private Binary image;
 }

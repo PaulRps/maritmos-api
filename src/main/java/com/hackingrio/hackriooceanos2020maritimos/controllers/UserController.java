@@ -32,6 +32,11 @@ public class UserController {
     return ResponseEntity.ok(userService.findAll());
   }
 
+  @GetMapping("ranking")
+  ResponseEntity<List<User>> getRanking() {
+    return ResponseEntity.ok(userService.gerRanking());
+  }
+
   @PostMapping
   ResponseEntity<User> save(@RequestBody User user) {
     return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);

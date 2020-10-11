@@ -4,8 +4,10 @@ import com.hackingrio.hackriooceanos2020maritimos.config.exceptions.ApiException
 import com.hackingrio.hackriooceanos2020maritimos.config.exceptions.ApiMessageEnum;
 import com.hackingrio.hackriooceanos2020maritimos.domain.entities.User;
 import com.hackingrio.hackriooceanos2020maritimos.repositories.UserRepository;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,19 @@ public class UserServiceImpl implements UserService {
     } catch (Exception e) {
       log.error(e.getMessage(), e);
       throw new ApiException(ApiMessageEnum.ERROR_INTERNAL_SERVER, e, "all users");
+    }
+  }
+
+  @Override
+  public List<User> gerRanking() {
+    try {
+      log.debug("ranking all users");
+      return findAll().stream()
+          .sorted(Comparator.comparingLong(User::getScore).reversed())
+          .collect(Collectors.toList());
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      throw new ApiException(ApiMessageEnum.ERROR_INTERNAL_SERVER, e, "ranking all users");
     }
   }
 

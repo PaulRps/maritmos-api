@@ -12,6 +12,8 @@ public interface UserService {
 
   List<User> findAll();
 
+  List<User> gerRanking();
+
   User save(User u);
 
   void update(User u);

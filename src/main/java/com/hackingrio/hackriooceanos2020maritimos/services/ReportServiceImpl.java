@@ -5,18 +5,13 @@ import com.hackingrio.hackriooceanos2020maritimos.config.exceptions.ApiMessageEn
 import com.hackingrio.hackriooceanos2020maritimos.domain.dto.ReportDto;
 import com.hackingrio.hackriooceanos2020maritimos.domain.entities.Report;
 import com.hackingrio.hackriooceanos2020maritimos.repositories.ReportRepository;
-import com.hackingrio.hackriooceanos2020maritimos.util.MultipartFileImage;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
@@ -140,16 +135,16 @@ public class ReportServiceImpl implements ReportService {
 
   private Report toEntity(ReportDto report) {
     try {
-      Binary binaryImg = null;
-      if (Objects.nonNull(report.getImage())) {
-        binaryImg = new Binary(BsonBinarySubType.BINARY, report.getImage().getBytes());
-      }
+      //      Binary binaryImg = null;
+      //      if (Objects.nonNull(report.getImage())) {
+      //        binaryImg = new Binary(BsonBinarySubType.BINARY, report.getImage().getBytes());
+      //      }
       return Report.builder()
           .description(report.getDescription())
           .latitude(report.getLatitude())
           .longitude(report.getLongitude())
           .userId(report.getUserId())
-          .image(binaryImg)
+          .image(report.getImage())
           .build();
     } catch (IOException e) {
       log.error("Error on read image bytes", e);
@@ -158,10 +153,10 @@ public class ReportServiceImpl implements ReportService {
   }
 
   private ReportDto toDto(Report report) {
-    MultipartFile binaryImg = null;
-    if (Objects.nonNull(report.getImage())) {
-      binaryImg = new MultipartFileImage(report.getImage().getData());
-    }
+    //    MultipartFile binaryImg = null;
+    //    if (Objects.nonNull(report.getImage())) {
+    //      binaryImg = new MultipartFileImage(report.getImage().getData());
+    //    }
     return ReportDto.builder()
         .id(report.getId())
         .category(report.getCategory())
@@ -169,7 +164,7 @@ public class ReportServiceImpl implements ReportService {
         .latitude(report.getLatitude())
         .longitude(report.getLongitude())
         .userId(report.getUserId())
-        .image(binaryImg)
+        .image(report.getImage())
         .build();
   }
 }
